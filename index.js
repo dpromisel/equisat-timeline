@@ -14,6 +14,15 @@
   // Create a Timeline
   var timeline = new vis.Timeline(container, items, options);
 
-var data = getErrorCodes(10);
+funciton getErrorCodes() {
+  fetch('http://api.brownspace.org/equisat/error-codes/latest')
+  .then(function(response) {
+    return response.json();
+  })
+  .then(function(myJson) {
+    console.log(JSON.stringify(myJson));
+  });
+}
+var data = getErrorCodes();
 
 console.log("data", data);
