@@ -13,3 +13,5 @@
   var options = {};
   // Create a Timeline
   var timeline = new vis.Timeline(container, items, options);
+
+console.log("it is working");
