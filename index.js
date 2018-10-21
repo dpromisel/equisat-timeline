@@ -1,4 +1,5 @@
-// DOM element where the Timeline will be attached
+$( document ).ready(function() {
+ // DOM element where the Timeline will be attached
   var container = document.getElementById('visualization');
   // Create a DataSet (allows two way data-binding)
   var items = new vis.DataSet([
@@ -14,6 +15,11 @@
   // Create a Timeline
   var timeline = new vis.Timeline(container, items, options);
 
+  var data = getErrorCodes();
+
+  console.log("data", data);
+});
+  
 funciton getErrorCodes() {
   fetch('http://api.brownspace.org/equisat/error-codes/latest')
   .then(function(response) {
@@ -23,6 +29,4 @@ funciton getErrorCodes() {
     console.log(JSON.stringify(myJson));
   });
 }
-var data = getErrorCodes();
 
-console.log("data", data);
