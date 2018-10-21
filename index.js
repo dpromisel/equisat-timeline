@@ -1,5 +1,6 @@
-$( document ).ready(function() {
- // DOM element where the Timeline will be attached
+document.addEventListener("DOMContentLoaded", function(){
+  // Handler when the DOM is fully loaded
+  // DOM element where the Timeline will be attached
   var container = document.getElementById('visualization');
   // Create a DataSet (allows two way data-binding)
   var items = new vis.DataSet([
