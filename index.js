@@ -14,4 +14,6 @@
   // Create a Timeline
   var timeline = new vis.Timeline(container, items, options);
 
-console.log("it is working");
+var data = getErrorCodes(10);
+
+console.log("data", data);
