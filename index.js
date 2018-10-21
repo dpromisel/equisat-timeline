@@ -17,6 +17,5 @@ document.addEventListener("DOMContentLoaded", function(){
   var timeline = new vis.Timeline(container, items, options);
 
   var data = getErrorCodes(10);
-
   console.log("data", data);
 });
