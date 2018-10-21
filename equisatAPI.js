@@ -71,7 +71,7 @@ export function getLowPowerData(signals, num) {
 // Returns up to num rows of error codes (with all fields present),
 // sorted by creation date
 export function getErrorCodes(num) {
-    fetchRouteLatest("error-codes", [], num); // all "signals"
+    return fetchRouteLatest("error-codes", [], num); // all "signals"
 }
 
 /*********************************************************/
