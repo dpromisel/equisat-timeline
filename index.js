@@ -16,18 +16,7 @@ document.addEventListener("DOMContentLoaded", function(){
   // Create a Timeline
   var timeline = new vis.Timeline(container, items, options);
 
-  var data = getErrorCodes();
+  var data = getErrorCodes(10);
 
   console.log("data", data);
 });
-  
-function getErrorCodes() {
-  fetch('http://api.brownspace.org/equisat/error-codes/latest')
-  .then(function(response) {
-    return response.json();
-  })
-  .then(function(myJson) {
-    console.log(JSON.stringify(myJson));
-  });
-}
-
