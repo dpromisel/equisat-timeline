@@ -20,7 +20,7 @@ $( document ).ready(function() {
   console.log("data", data);
 });
   
-funciton getErrorCodes() {
+function getErrorCodes() {
   fetch('http://api.brownspace.org/equisat/error-codes/latest')
   .then(function(response) {
     return response.json();
