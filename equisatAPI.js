@@ -35,42 +35,42 @@ API_ROUTE_PREFIX = "http://api.brownspace.org/equisat/";
 // Any signals that are NOT valid names (aren't in the database schema) will
 // have values of "undefined"
 /*********************************************************/
-var axios = require('axios');
+//var axios = require('axios');
 
 // These functions returns up to num rows containing the given signals,
 // sorted in order of their creation date.
 // If signals is empty or null, all signals will be returned.
-export function getCurrentInfoData(signals, num) {
+function getCurrentInfoData(signals, num) {
     return fetchRouteLatest("current-infos", signals, num);
 }
 
-export function getPreambleData(signals, num) {
+function getPreambleData(signals, num) {
     return fetchRouteLatest("/transmissions", signals, num);
 }
 
-export function getIdleData(signals, num) {
+function getIdleData(signals, num) {
     return fetchRouteLatest("data/idle", signals, num);
 }
 
-export function getAttitudeData(signals, num) {
+function getAttitudeData(signals, num) {
     return fetchRouteLatest("data/attitude", signals, num);
 }
 
-export function getFlashBurstData(signals, num) {
+function getFlashBurstData(signals, num) {
     return fetchRouteLatest("data/flashBurst", signals, num);
 }
 
-export function getFlashCompareData(signals, num) {
+function getFlashCompareData(signals, num) {
     return fetchRouteLatest("data/flashComp", signals, num);
 }
 
-export function getLowPowerData(signals, num) {
+function getLowPowerData(signals, num) {
     return fetchRouteLatest("data/lowPower", signals, num);
 }
 
 // Returns up to num rows of error codes (with all fields present),
 // sorted by creation date
-export function getErrorCodes(num) {
+function getErrorCodes(num) {
     return fetchRouteLatest("error-codes", [], num); // all "signals"
 }
 
@@ -89,15 +89,15 @@ export function getErrorCodes(num) {
 //        more frequently than another, the less frequent sensors
 //        will simply duplicate their most recent value for all
 //        extra timestamps necessary to correspond with the
-//        more frequent sensor. 
+//        more frequent sensor.
 //
 // getSignalsLatest Example:
-// Query: 
+// Query:
 //     getSignalsLatest(["LF1REF", "LED3SNS"], 3)
 //    .then(function(result) {
 //       console.log(result.data);
 //     })
-//     .catch(function (error) {          
+//     .catch(function (error) {
 //       console.log(error);
 //   });
 //
@@ -110,12 +110,12 @@ export function getErrorCodes(num) {
 //      values: [ 200, 200, 167 ] } }
 //
 // getSignalsLatestSingle Example:
-// Query: 
+// Query:
 //     getSignalsLatestSingle(["LF1REF", "LED3SNS"])
 //    .then(function(result) {
 //       console.log(result.data);
 //     })
-//     .catch(function (error) {          
+//     .catch(function (error) {
 //       console.log(error);
 //   });
 //
@@ -129,35 +129,35 @@ export function getErrorCodes(num) {
 //       .then(function(result) {
 //          console.log(result.data);
 //        })
-//        .catch(function (error) {          
+//        .catch(function (error) {
 //          console.log(error);
 //      });
-// 
+//
 // Console Output:
 //          { LF1REF:
 //               { timestamps:
-//                [ 1529996366626,        
+//                [ 1529996366626,
 //                  1529996366627 ],
 //               values: [ 3638, 3584 ] },
 //            LED3SNS:
 //             { timestamps:
 //                [ 1529996366638,
 //                  1529996366638 ],
-//               values: [ 200, 167 ] } 
+//               values: [ 200, 167 ] }
 //          }
 
 
 //
 /*********************************************************/
-export function getSignalsLatest(signals, num) {
+function getSignalsLatest(signals, num) {
     return fetchRouteLatest("signals", signals, num);
 }
 
-export function getSignalsLatestSingle(signals) {
+function getSignalsLatestSingle(signals) {
     return fetchRouteLatestSingle("signals", signals);
 }
 
-export function getSignalsInPeriod(signals, startTime, endTime) {
+function getSignalsInPeriod(signals, startTime, endTime) {
     return fetchRouteTimePeriod("signals", signals, startTime, endTime);
 }
 /*********************************************************/
@@ -165,8 +165,8 @@ export function getSignalsInPeriod(signals, startTime, endTime) {
 /*********************************************************/
 function fetchRouteLatest (routeSuffix, signals, num) {
     if (ENABLE_DUMMY_DATA) {
-        return getDummyData(signals, num);        
-    } else {        
+        return getDummyData(signals, num);
+    } else {
         signalStr = (signals != null) ? signals.join(",") : [];
         query = { "limit": num, "fields": signalStr };
         return axios({
@@ -178,7 +178,7 @@ function fetchRouteLatest (routeSuffix, signals, num) {
                 'Content-Type': 'application/json',
             }
         });
-    }    
+    }
 }
 
 function fetchRouteTimePeriod (routeSuffix, signals, startTime, endTime) {
@@ -202,7 +202,7 @@ function fetchRouteTimePeriod (routeSuffix, signals, startTime, endTime) {
 function fetchRouteLatestSingle (routeSuffix, signals) {
     if (ENABLE_DUMMY_DATA) {
         return getDummyData(signals, 1);
-    } else {        
+    } else {
         signalStr = (signals != null) ? signals.join(",") : [];
         query = { "fields": signalStr };
         return axios({
@@ -214,7 +214,7 @@ function fetchRouteLatestSingle (routeSuffix, signals) {
                 'Content-Type': 'application/json',
             }
         });
-    }    
+    }
 }
 
 function getDummyData(signals, num) {
